@@ -3,6 +3,10 @@ from typing import List, Tuple
 
 
 def findMinRooms(*schedule: List[float]) -> int:
+	"""
+	:param schedule: list of start and end times of time slots
+	:return: minimum number of conference rooms needed
+	"""
 	try:
 		return findMinRoomsWithError([(item[0], item[1]) for item in schedule])
 	except Exception as e:
@@ -10,6 +14,9 @@ def findMinRooms(*schedule: List[float]) -> int:
 
 
 def findMinRoomsWithError(schedule: List[Tuple[float, float]]) -> int:
+	"""
+	:return: minimum number of conference rooms needed
+	"""
 	sorted_schedule = sorted(schedule, key=lambda item: item[0])
 
 	max_overlap = 0
@@ -22,10 +29,15 @@ def findMinRoomsWithError(schedule: List[Tuple[float, float]]) -> int:
 
 
 def overlapping(schedule: List[Tuple[float, float]], index: int) -> int:
+	"""
+	:param schedule: time slots, sorted by start time
+	:param index: index of schedule to find overlapping slots
+	:return: Number of overlapping time slots of time slot at index
+	"""
 	overlapping_count = 0
 	for i in range(index, len(schedule)):
-		if (schedule[index][0] <= schedule[i][0] <= schedule[index][1]) or (
-				schedule[index][0] <= schedule[i][1] <= schedule[index][1]):
+		if (schedule[index][0] <= schedule[i][0] <= schedule[index][1]) \
+				or (schedule[index][0] <= schedule[i][1] <= schedule[index][1]):
 			overlapping_count += 1
 		elif schedule[i][0] > schedule[index][1]:
 			break
