@@ -33,9 +33,13 @@ def overlapping(schedule: List[Tuple[float, float]], index: int) -> int:
 	:param schedule: time slots, sorted by start time
 	:param index: index of schedule to find overlapping slots
 	:return: Number of overlapping time slots of time slot at index
+	:raises Exception: schedule includes a start time that is greater than end time
 	"""
 	overlapping_count = 0
 	for i in range(index, len(schedule)):
+		if schedule[index][0] > schedule[index][1]:
+			raise Exception('start time is greater than end time')
+
 		if (schedule[index][0] <= schedule[i][0] <= schedule[index][1]) \
 				or (schedule[index][0] <= schedule[i][1] <= schedule[index][1]):
 			overlapping_count += 1

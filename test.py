@@ -32,6 +32,9 @@ class Test(unittest.TestCase):
 		for i, test in enumerate(tests):
 			self.assertEqual(test[1], findMinRoomsWithError(test[0]))
 
+		with self.assertRaises(Exception):
+			findMinRoomsWithError([(1, 0)])
+
 	def test_overlapping(self):
 		tests = [
 			[
