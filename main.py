@@ -20,7 +20,7 @@ def findMinRoomsWithError(schedule: List[Tuple[float, float]]) -> int:
 	sorted_schedule = sorted(schedule, key=lambda item: item[0])
 
 	max_overlap = 0
-	for i, _ in enumerate(sorted_schedule):
+	for i in range(len(sorted_schedule)):
 		n = overlapping(sorted_schedule, i)
 		if n > max_overlap:
 			max_overlap = n
